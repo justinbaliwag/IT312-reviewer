@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
   <title>IT 312: System Integration and Architecture - Interactive Reviewer</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -30,197 +30,215 @@
   <style>
     .tab-btn.active {
       border-bottom: 3px solid #0284c7;
-      color: #0369a1;
+      color: #38bdf8;
       font-weight: 700;
+      background: rgba(255, 255, 255, 0.05);
+    }
+    /* Hide scrollbars for clean tab swiping on mobile */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased">
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans antialiased selection:bg-sky-100 selection:text-sky-900">
 
   <!-- Header -->
   <header class="bg-brand-900 text-white shadow-lg sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center space-x-3">
-          <i class="fa-solid fa-network-wired text-brand-500 text-2xl"></i>
-          <div>
-            <h1 class="text-lg font-bold tracking-tight">IT 312: System Integration & Architecture</h1>
-            <p class="text-xs text-slate-300">Midterm Exam Interactive Reviewer</p>
+      <div class="flex items-center justify-between h-16 sm:h-20">
+        <div class="flex items-center space-x-3 overflow-hidden">
+          <div class="w-10 h-10 rounded-lg bg-brand-800 border border-brand-700 flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-network-wired text-brand-500 text-xl"></i>
+          </div>
+          <div class="truncate">
+            <h1 class="text-base sm:text-lg font-bold tracking-tight truncate">IT 312: System Integration & Architecture</h1>
+            <p class="text-xs text-slate-300 truncate">Midterm Exam Interactive Reviewer</p>
           </div>
         </div>
-        <div class="hidden sm:flex items-center space-x-2 text-xs bg-brand-800 py-1.5 px-3 rounded-full border border-brand-700">
+        <div class="hidden lg:flex items-center space-x-2 text-xs bg-brand-800/80 py-1.5 px-3 rounded-full border border-brand-700 flex-shrink-0">
           <i class="fa-solid fa-lightbulb text-amber-400"></i>
           <span>Study for understanding, not memorization</span>
         </div>
       </div>
       <!-- Tab Navigation -->
-      <nav class="flex space-x-4 border-t border-brand-800 text-sm overflow-x-auto">
-        <button onclick="switchTab('tab-guide')" id="nav-guide" class="tab-btn active py-3 px-4 text-slate-200 hover:text-white flex items-center space-x-2 transition whitespace-nowrap">
-          <i class="fa-solid fa-book-bookmark"></i>
+      <nav class="flex space-x-2 border-t border-brand-800 text-xs sm:text-sm overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 py-1">
+        <button onclick="switchTab('tab-guide')" id="nav-guide" class="tab-btn active py-2.5 px-3 sm:px-4 rounded-t text-slate-200 hover:text-white flex items-center space-x-2 transition whitespace-nowrap flex-shrink-0">
+          <i class="fa-solid fa-book-bookmark text-sky-400"></i>
           <span>1. Must-Know Guide</span>
         </button>
-        <button onclick="switchTab('tab-drills')" id="nav-drills" class="tab-btn py-3 px-4 text-slate-200 hover:text-white flex items-center space-x-2 transition whitespace-nowrap">
-          <i class="fa-solid fa-terminal"></i>
-          <span>2. Problem & Script Drills</span>
+        <button onclick="switchTab('tab-drills')" id="nav-drills" class="tab-btn py-2.5 px-3 sm:px-4 rounded-t text-slate-200 hover:text-white flex items-center space-x-2 transition whitespace-nowrap flex-shrink-0">
+          <i class="fa-solid fa-terminal text-sky-400"></i>
+          <span>2. Problem &amp; Script Drills</span>
         </button>
-        <button onclick="switchTab('tab-essay')" id="nav-essay" class="tab-btn py-3 px-4 text-slate-200 hover:text-white flex items-center space-x-2 transition whitespace-nowrap">
-          <i class="fa-solid fa-pen-to-square"></i>
-          <span>3. Conceptual & Essay Recall</span>
+        <button onclick="switchTab('tab-essay')" id="nav-essay" class="tab-btn py-2.5 px-3 sm:px-4 rounded-t text-slate-200 hover:text-white flex items-center space-x-2 transition whitespace-nowrap flex-shrink-0">
+          <i class="fa-solid fa-pen-to-square text-sky-400"></i>
+          <span>3. Conceptual &amp; Essay Recall</span>
         </button>
       </nav>
     </div>
   </header>
 
   <!-- Main Content Container -->
-  <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+  <main class="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-5 sm:py-8">
 
     <!-- ==========================================
          TAB 1: MUST-KNOW GUIDE
          ========================================== -->
-    <div id="tab-guide" class="space-y-8">
+    <div id="tab-guide" class="space-y-6 sm:space-y-8">
       
       <!-- Welcome & Core Strategy Banner -->
-      <div class="bg-gradient-to-r from-brand-700 to-sky-800 text-white rounded-xl p-6 shadow-md">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div class="bg-gradient-to-br from-brand-800 to-sky-900 text-white rounded-xl p-5 sm:p-6 shadow-sm border border-brand-700">
+        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div>
-            <h2 class="text-xl font-bold mb-1">How to Use This Reviewer</h2>
-            <p class="text-brand-100 text-sm max-w-2xl">
+            <h2 class="text-lg sm:text-xl font-bold mb-1 flex items-center gap-2">
+              <i class="fa-solid fa-graduation-cap text-amber-400"></i>
+              <span>How to Use This Reviewer</span>
+            </h2>
+            <p class="text-brand-100 text-xs sm:text-sm leading-relaxed max-w-2xl">
               Read the definition first, understand the example, then explain why the concept fits. The examples here are designed so you can practice applying ideas instead of memorizing answers.
             </p>
           </div>
-          <div class="bg-white/10 backdrop-blur-sm px-4 py-3 rounded-lg border border-white/20 text-xs">
-            <span class="font-semibold block text-amber-300">Golden Rule of Analysis:</span>
+          <div class="bg-white/10 backdrop-blur-sm p-3.5 rounded-lg border border-white/15 text-xs text-slate-200 flex-shrink-0">
+            <span class="font-bold text-amber-300 block mb-0.5">Golden Rule of Analysis:</span>
             Do not choose based only on a keyword. Ask what is being checked or performed.
           </div>
         </div>
       </div>
 
       <!-- Pre-Exam Self-Evaluation Checklist -->
-      <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
-        <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+      <section class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2 mb-4">
           <div class="flex items-center space-x-2">
-            <i class="fa-solid fa-clipboard-check text-sky-600 text-xl"></i>
-            <h3 class="text-lg font-bold text-slate-800">Final Study Checklist (Pre-Exam Self-Evaluation)</h3>
+            <i class="fa-solid fa-clipboard-check text-sky-600 text-lg sm:text-xl"></i>
+            <h3 class="text-base sm:text-lg font-bold text-slate-800">Final Study Checklist (Pre-Exam Self-Evaluation)</h3>
           </div>
-          <span id="checklist-progress" class="text-xs font-semibold px-2.5 py-1 bg-sky-50 text-sky-700 rounded-full border border-sky-200">
+          <span id="checklist-progress" class="self-start sm:self-auto text-xs font-semibold px-2.5 py-1 bg-sky-50 text-sky-700 rounded-full border border-sky-200">
             0 / 6 Mastered
           </span>
         </div>
-        <p class="text-xs text-slate-500 mb-4">Click each item as you master the concept. State the concept simply, give a fresh example, and explain the clue before checking.</p>
+        <p class="text-xs text-slate-500 mb-4 leading-relaxed">
+          Click each item as you master the concept. State the concept simply, give a fresh example, and explain the clue before checking.
+        </p>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3" id="checklist-items">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5 sm:gap-3" id="checklist-items">
           <!-- Item 1 -->
-          <label class="flex items-start space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
-            <input type="checkbox" onchange="updateChecklistProgress()" class="study-checkbox mt-1 h-4 w-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500">
-            <span class="text-sm text-slate-700">I can explain each <strong>SDLC phase</strong> in my own words and give a new example.</span>
+          <label class="flex items-start space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateChecklistProgress()" class="study-checkbox mt-0.5 h-4 w-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500 flex-shrink-0">
+            <span class="text-xs sm:text-sm text-slate-700 leading-snug">I can explain each <strong>SDLC phase</strong> in my own words and give a new example.</span>
           </label>
           <!-- Item 2 -->
-          <label class="flex items-start space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
-            <input type="checkbox" onchange="updateChecklistProgress()" class="study-checkbox mt-1 h-4 w-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500">
-            <span class="text-sm text-slate-700">I can distinguish <strong>Requirements Review, Peer, CDR, TRR, FAI, FCA, and PCA</strong> by what is being checked.</span>
+          <label class="flex items-start space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateChecklistProgress()" class="study-checkbox mt-0.5 h-4 w-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500 flex-shrink-0">
+            <span class="text-xs sm:text-sm text-slate-700 leading-snug">I can distinguish <strong>Requirements Review, Peer, CDR, TRR, FAI, FCA, and PCA</strong> by what is being checked.</span>
           </label>
           <!-- Item 3 -->
-          <label class="flex items-start space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
-            <input type="checkbox" onchange="updateChecklistProgress()" class="study-checkbox mt-1 h-4 w-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500">
-            <span class="text-sm text-slate-700">I can distinguish <strong>Functional, Non-functional, and Domain requirements</strong> and justify each choice.</span>
+          <label class="flex items-start space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateChecklistProgress()" class="study-checkbox mt-0.5 h-4 w-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500 flex-shrink-0">
+            <span class="text-xs sm:text-sm text-slate-700 leading-snug">I can distinguish <strong>Functional, Non-functional, and Domain requirements</strong> and justify each choice.</span>
           </label>
           <!-- Item 4 -->
-          <label class="flex items-start space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
-            <input type="checkbox" onchange="updateChecklistProgress()" class="study-checkbox mt-1 h-4 w-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500">
-            <span class="text-sm text-slate-700">I can explain <strong>Elicitation, Analysis and Negotiation, Specification, Validation, and Requirements Management</strong>.</span>
+          <label class="flex items-start space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateChecklistProgress()" class="study-checkbox mt-0.5 h-4 w-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500 flex-shrink-0">
+            <span class="text-xs sm:text-sm text-slate-700 leading-snug">I can explain <strong>Elicitation, Analysis and Negotiation, Specification, Validation, and Requirements Management</strong>.</span>
           </label>
           <!-- Item 5 -->
-          <label class="flex items-start space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
-            <input type="checkbox" onchange="updateChecklistProgress()" class="study-checkbox mt-1 h-4 w-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500">
-            <span class="text-sm text-slate-700">I can identify <strong>actors and use cases</strong> from a short scenario and draw a clear system boundary.</span>
+          <label class="flex items-start space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateChecklistProgress()" class="study-checkbox mt-0.5 h-4 w-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500 flex-shrink-0">
+            <span class="text-xs sm:text-sm text-slate-700 leading-snug">I can identify <strong>actors and use cases</strong> from a short scenario and draw a clear system boundary.</span>
           </label>
           <!-- Item 6 -->
-          <label class="flex items-start space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition">
-            <input type="checkbox" onchange="updateChecklistProgress()" class="study-checkbox mt-1 h-4 w-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500">
-            <span class="text-sm text-slate-700">I can <strong>explain why my answer fits</strong> the scenario rather than just naming a term.</span>
+          <label class="flex items-start space-x-3 p-3 rounded-lg border border-slate-200 hover:bg-slate-50 cursor-pointer transition select-none">
+            <input type="checkbox" onchange="updateChecklistProgress()" class="study-checkbox mt-0.5 h-4 w-4 text-sky-600 rounded border-slate-300 focus:ring-sky-500 flex-shrink-0">
+            <span class="text-xs sm:text-sm text-slate-700 leading-snug">I can <strong>explain why my answer fits</strong> the scenario rather than just naming a term.</span>
           </label>
         </div>
 
         <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-900 flex items-center space-x-2">
-          <i class="fa-solid fa-compass text-amber-600"></i>
+          <i class="fa-solid fa-compass text-amber-600 flex-shrink-0"></i>
           <span><strong>Study Strategy:</strong> Define it simply &rarr; Give an example &rarr; Explain the clue.</span>
         </div>
       </section>
 
       <!-- Section: SDLC -->
       <section class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-        <div class="bg-slate-800 text-white px-6 py-4 flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <i class="fa-solid fa-arrows-spin text-sky-400 text-lg"></i>
-            <h3 class="font-bold text-base">Software Development Life Cycle (SDLC)</h3>
+        <div class="bg-slate-800 text-white px-4 sm:px-6 py-3.5 flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <i class="fa-solid fa-arrows-spin text-sky-400"></i>
+            <h3 class="font-bold text-sm sm:text-base">Software Development Life Cycle (SDLC)</h3>
           </div>
-          <span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">5 Core Phases</span>
+          <span class="text-[11px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded">5 Core Phases</span>
         </div>
-        <div class="p-6">
-          <p class="text-sm text-slate-600 mb-4">
+        <div class="p-4 sm:p-6">
+          <p class="text-xs sm:text-sm text-slate-600 mb-4 leading-relaxed">
             The SDLC is an organized process for planning, building, checking, and maintaining a software system. It helps a team move from an idea to a working product in manageable steps.
           </p>
 
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-sm">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 uppercase text-xs tracking-wider border-b border-slate-200">
-                  <th class="py-3 px-4 font-semibold">Phase</th>
-                  <th class="py-3 px-4 font-semibold">In Simple Words</th>
-                  <th class="py-3 px-4 font-semibold">Everyday Example (Queue System)</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-200">
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Requirements</td>
-                  <td class="py-3 px-4 text-slate-600">Find out what users need and what the system must do.</td>
-                  <td class="py-3 px-4 text-slate-600">A school asks for an online queue system and explains who can get a number and what information is needed.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Design</td>
-                  <td class="py-3 px-4 text-slate-600">Plan how the system will look and work before building it.</td>
-                  <td class="py-3 px-4 text-slate-600">The team sketches the queue screen and plans how student records will be stored.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Implementation</td>
-                  <td class="py-3 px-4 text-slate-600">Write the code and build the planned features.</td>
-                  <td class="py-3 px-4 text-slate-600">Developers create the queue-number form and the staff dashboard.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Integration &amp; Troubleshooting</td>
-                  <td class="py-3 px-4 text-slate-600">Connect separate parts and fix problems between them.</td>
-                  <td class="py-3 px-4 text-slate-600">The queue form submits a number, but the dashboard does not show it; the team checks the connection.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Testing</td>
-                  <td class="py-3 px-4 text-slate-600">Check whether the system works as expected and find defects.</td>
-                  <td class="py-3 px-4 text-slate-600">Students try to get queue numbers, and testers check invalid inputs and duplicate requests.</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="overflow-x-auto -mx-4 sm:mx-0">
+            <div class="inline-block min-w-full align-middle px-4 sm:px-0">
+              <table class="min-w-[580px] w-full text-left border-collapse text-xs sm:text-sm">
+                <thead>
+                  <tr class="bg-slate-100 text-slate-700 uppercase text-[11px] tracking-wider border-b border-slate-200">
+                    <th class="py-2.5 px-3 sm:px-4 font-semibold w-1/4">Phase</th>
+                    <th class="py-2.5 px-3 sm:px-4 font-semibold w-1/3">In Simple Words</th>
+                    <th class="py-2.5 px-3 sm:px-4 font-semibold">Everyday Example (Queue System)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Requirements</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Find out what users need and what the system must do.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">A school asks for an online queue system and explains who can get a number and what information is needed.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Design</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Plan how the system will look and work before building it.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">The team sketches the queue screen and plans how student records will be stored.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Implementation</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Write the code and build the planned features.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Developers create the queue-number form and the staff dashboard.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Integration &amp; Troubleshooting</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Connect separate parts and fix problems between them.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">The queue form submits a number, but the dashboard does not show it; the team checks the connection.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Testing</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Check whether the system works as expected and find defects.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Students try to get queue numbers, and testers check invalid inputs and duplicate requests.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <!-- Quick Distinguish Box -->
-          <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+          <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
             <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Asking users?</span>
-              <span class="text-sm font-semibold text-sky-700">Requirements</span>
+              <span class="text-[11px] font-bold text-slate-500 uppercase block mb-0.5">Asking users?</span>
+              <span class="text-xs sm:text-sm font-semibold text-sky-800">Requirements</span>
             </div>
             <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Planning screens/structure?</span>
-              <span class="text-sm font-semibold text-sky-700">Design</span>
+              <span class="text-[11px] font-bold text-slate-500 uppercase block mb-0.5">Planning screens/structure?</span>
+              <span class="text-xs sm:text-sm font-semibold text-sky-800">Design</span>
             </div>
             <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Writing feature code?</span>
-              <span class="text-sm font-semibold text-sky-700">Implementation</span>
+              <span class="text-[11px] font-bold text-slate-500 uppercase block mb-0.5">Writing feature code?</span>
+              <span class="text-xs sm:text-sm font-semibold text-sky-800">Implementation</span>
             </div>
             <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Connecting modules?</span>
-              <span class="text-sm font-semibold text-sky-700">Integration &amp; Troubleshooting</span>
+              <span class="text-[11px] font-bold text-slate-500 uppercase block mb-0.5">Connecting modules?</span>
+              <span class="text-xs sm:text-sm font-semibold text-sky-800 leading-tight">Integration &amp; Troubleshooting</span>
             </div>
             <div class="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-              <span class="text-xs font-bold text-slate-500 uppercase block mb-1">Verifying behavior/defects?</span>
-              <span class="text-sm font-semibold text-sky-700">Testing</span>
+              <span class="text-[11px] font-bold text-slate-500 uppercase block mb-0.5">Verifying behavior/defects?</span>
+              <span class="text-xs sm:text-sm font-semibold text-sky-800">Testing</span>
             </div>
           </div>
           <p class="text-xs text-slate-500 mt-3 italic">
@@ -231,69 +249,71 @@
 
       <!-- Section: Technical Reviews and Audits -->
       <section class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-        <div class="bg-slate-800 text-white px-6 py-4 flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <i class="fa-solid fa-list-check text-sky-400 text-lg"></i>
-            <h3 class="font-bold text-base">Technical Reviews and Audits</h3>
+        <div class="bg-slate-800 text-white px-4 sm:px-6 py-3.5 flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <i class="fa-solid fa-list-check text-sky-400"></i>
+            <h3 class="font-bold text-sm sm:text-base">Technical Reviews and Audits</h3>
           </div>
-          <span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">7 Formal Checkpoints</span>
+          <span class="text-[11px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded">7 Checkpoints</span>
         </div>
-        <div class="p-6">
-          <p class="text-sm text-slate-600 mb-4">
+        <div class="p-4 sm:p-6">
+          <p class="text-xs sm:text-sm text-slate-600 mb-4 leading-relaxed">
             A review or audit is a structured check used to find issues, confirm readiness, or verify that a software product matches its agreed requirements and records. The key is to identify <strong>what is being checked and when</strong>.
           </p>
 
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-sm">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 uppercase text-xs tracking-wider border-b border-slate-200">
-                  <th class="py-3 px-4 font-semibold">Review / Audit</th>
-                  <th class="py-3 px-4 font-semibold">Definition (What is checked)</th>
-                  <th class="py-3 px-4 font-semibold">Real-World Example</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-200">
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Requirements Review</td>
-                  <td class="py-3 px-4 text-slate-600">Checks whether requirements are clear, complete, consistent, and understandable before committing to them.</td>
-                  <td class="py-3 px-4 text-slate-600">A team notices that "fast loading" has no measurable target and asks the client to define an acceptable loading time.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Peer / Incremental Review</td>
-                  <td class="py-3 px-4 text-slate-600">A colleague checks a small part of the work as it is developed, rather than waiting until the whole product is finished.</td>
-                  <td class="py-3 px-4 text-slate-600">A developer asks a teammate to inspect a newly added password-reset feature before merging it.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Critical Design Review (CDR)</td>
-                  <td class="py-3 px-4 text-slate-600">A detailed check of the proposed design to see whether it can meet requirements and is ready to proceed.</td>
-                  <td class="py-3 px-4 text-slate-600">Before building a payment feature, the team reviews the planned data flow, security controls, and failure handling.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Test Readiness Review (TRR)</td>
-                  <td class="py-3 px-4 text-slate-600">Checks whether system, test cases, tools, environment, and people are ready for formal testing.</td>
-                  <td class="py-3 px-4 text-slate-600">The team confirms that test accounts and sample data are available before running a full test cycle.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">First Article Inspection (FAI)</td>
-                  <td class="py-3 px-4 text-slate-600">Inspects the first completed item or implementation to verify that it matches the specified design or requirements.</td>
-                  <td class="py-3 px-4 text-slate-600">The first manufactured device is checked against drawings; in software, an initial deliverable is checked against its specification.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Functional Configuration Audit (FCA)</td>
-                  <td class="py-3 px-4 text-slate-600">Verifies that the system's actual functions and performance satisfy the approved functional requirements.</td>
-                  <td class="py-3 px-4 text-slate-600">Auditors run defined scenarios to confirm that a booking system performs the actions promised in its requirements.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Physical Configuration Audit (PCA)</td>
-                  <td class="py-3 px-4 text-slate-600">Checks that the delivered product and its documentation match the approved configuration and records.</td>
-                  <td class="py-3 px-4 text-slate-600">The team compares the release version, installed components, and accompanying documents against the approved configuration list.</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="overflow-x-auto -mx-4 sm:mx-0">
+            <div class="inline-block min-w-full align-middle px-4 sm:px-0">
+              <table class="min-w-[580px] w-full text-left border-collapse text-xs sm:text-sm">
+                <thead>
+                  <tr class="bg-slate-100 text-slate-700 uppercase text-[11px] tracking-wider border-b border-slate-200">
+                    <th class="py-2.5 px-3 sm:px-4 font-semibold w-1/4">Review / Audit</th>
+                    <th class="py-2.5 px-3 sm:px-4 font-semibold w-1/3">Definition (What is checked)</th>
+                    <th class="py-2.5 px-3 sm:px-4 font-semibold">Real-World Example</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Requirements Review</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Checks whether requirements are clear, complete, consistent, and understandable before committing to them.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">A team notices that "fast loading" has no measurable target and asks the client to define an acceptable loading time.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Peer / Incremental Review</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">A colleague checks a small part of the work as it is developed, rather than waiting until the whole product is finished.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">A developer asks a teammate to inspect a newly added password-reset feature before merging it.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Critical Design Review (CDR)</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">A detailed check of the proposed design to see whether it can meet requirements and is ready to proceed.</td>
+                    <td class="py-3 px-4 text-slate-600">Before building a payment feature, the team reviews the planned data flow, security controls, and failure handling.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Test Readiness Review (TRR)</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Checks whether system, test cases, tools, environment, and people are ready for formal testing.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">The team confirms that test accounts and sample data are available before running a full test cycle.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">First Article Inspection (FAI)</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Inspects the first completed item or implementation to verify that it matches the specified design or requirements.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">The first manufactured device is checked against drawings; in software, an initial deliverable is checked against its specification.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Functional Configuration Audit (FCA)</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Verifies that the system's actual functions and performance satisfy the approved functional requirements.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Auditors run defined scenarios to confirm that a booking system performs the actions promised in its requirements.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Physical Configuration Audit (PCA)</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Checks that the delivered product and its documentation match the approved configuration and records.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">The team compares the release version, installed components, and accompanying documents against the approved configuration list.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <!-- Fast Comparison Clues -->
-          <div class="mt-5 p-4 bg-sky-50 border border-sky-200 rounded-lg">
+          <div class="mt-5 p-3.5 sm:p-4 bg-sky-50 border border-sky-200 rounded-lg">
             <h4 class="text-xs font-bold uppercase tracking-wider text-sky-900 mb-2">Fast Comparison Clues:</h4>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs text-sky-950">
               <div>&bull; <strong>Requirements Review:</strong> Are requirements good enough to work from?</div>
@@ -310,37 +330,37 @@
 
       <!-- Section: Types of Software Requirements -->
       <section class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-        <div class="bg-slate-800 text-white px-6 py-4 flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <i class="fa-solid fa-shapes text-sky-400 text-lg"></i>
-            <h3 class="font-bold text-base">Types of Software Requirements</h3>
+        <div class="bg-slate-800 text-white px-4 sm:px-6 py-3.5 flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <i class="fa-solid fa-shapes text-sky-400"></i>
+            <h3 class="font-bold text-sm sm:text-base">Types of Software Requirements</h3>
           </div>
-          <span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">3-Part Classification</span>
+          <span class="text-[11px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded">3-Part Classification</span>
         </div>
-        <div class="p-6">
-          <p class="text-sm text-slate-600 mb-4">
+        <div class="p-4 sm:p-6">
+          <p class="text-xs sm:text-sm text-slate-600 mb-4 leading-relaxed">
             A requirement describes something a system must do or a condition it must satisfy. Requirements help users and developers agree on what "done correctly" means.
           </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-            <div class="p-4 rounded-lg border-2 border-emerald-200 bg-emerald-50/50">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 sm:gap-4 mb-4">
+            <div class="p-3.5 sm:p-4 rounded-lg border-2 border-emerald-200 bg-emerald-50/50">
               <span class="text-xs font-bold uppercase tracking-wide text-emerald-800">1. Functional</span>
-              <p class="text-sm font-semibold text-slate-800 mt-1">Describes a service, action, or behavior the system must provide.</p>
-              <div class="mt-3 p-2 bg-white rounded border border-emerald-100 text-xs text-slate-600">
+              <p class="text-xs sm:text-sm font-semibold text-slate-800 mt-1">Describes a service, action, or behavior the system must provide.</p>
+              <div class="mt-2.5 p-2.5 bg-white rounded border border-emerald-100 text-xs text-slate-600">
                 <strong>Example:</strong> A student portal must let a student view their class schedule.
               </div>
             </div>
-            <div class="p-4 rounded-lg border-2 border-indigo-200 bg-indigo-50/50">
+            <div class="p-3.5 sm:p-4 rounded-lg border-2 border-indigo-200 bg-indigo-50/50">
               <span class="text-xs font-bold uppercase tracking-wide text-indigo-800">2. Non-Functional</span>
-              <p class="text-sm font-semibold text-slate-800 mt-1">Describes a quality, constraint, or standard for how the system operates.</p>
-              <div class="mt-3 p-2 bg-white rounded border border-indigo-100 text-xs text-slate-600">
+              <p class="text-xs sm:text-sm font-semibold text-slate-800 mt-1">Describes a quality, constraint, or standard for how the system operates.</p>
+              <div class="mt-2.5 p-2.5 bg-white rounded border border-indigo-100 text-xs text-slate-600">
                 <strong>Example:</strong> The schedule page should load within two seconds under normal conditions.
               </div>
             </div>
-            <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50/50">
+            <div class="p-3.5 sm:p-4 rounded-lg border-2 border-amber-200 bg-amber-50/50">
               <span class="text-xs font-bold uppercase tracking-wide text-amber-800">3. Domain Requirement</span>
-              <p class="text-sm font-semibold text-slate-800 mt-1">Comes from rules, practices, or constraints specific to the field where used.</p>
-              <div class="mt-3 p-2 bg-white rounded border border-amber-100 text-xs text-slate-600">
+              <p class="text-xs sm:text-sm font-semibold text-slate-800 mt-1">Comes from rules, practices, or constraints specific to the field where used.</p>
+              <div class="mt-2.5 p-2.5 bg-white rounded border border-amber-100 text-xs text-slate-600">
                 <strong>Example:</strong> A university system must follow the institution's approved grading rules.
               </div>
             </div>
@@ -350,123 +370,125 @@
 
       <!-- Section: Requirements Development -->
       <section class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-        <div class="bg-slate-800 text-white px-6 py-4 flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <i class="fa-solid fa-code-branch text-sky-400 text-lg"></i>
-            <h3 class="font-bold text-base">Requirements Development Activities</h3>
+        <div class="bg-slate-800 text-white px-4 sm:px-6 py-3.5 flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <i class="fa-solid fa-code-branch text-sky-400"></i>
+            <h3 class="font-bold text-sm sm:text-base">Requirements Development Activities</h3>
           </div>
-          <span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">5 Iterative Activities</span>
+          <span class="text-[11px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded">5 Iterative Activities</span>
         </div>
-        <div class="p-6">
-          <p class="text-sm text-slate-600 mb-4">
+        <div class="p-4 sm:p-6">
+          <p class="text-xs sm:text-sm text-slate-600 mb-4 leading-relaxed">
             The work of discovering, understanding, documenting, and checking what stakeholders need from a system.
           </p>
 
           <!-- Flow Diagram Memory Aid -->
-          <div class="flex flex-wrap items-center justify-center gap-2 p-4 bg-slate-100 rounded-xl mb-6 text-sm font-bold text-slate-700">
-            <div class="px-3 py-1.5 bg-white rounded-lg shadow-sm border border-slate-300 text-sky-800">Ask (Elicitation)</div>
-            <i class="fa-solid fa-arrow-right text-slate-400"></i>
-            <div class="px-3 py-1.5 bg-white rounded-lg shadow-sm border border-slate-300 text-sky-800">Sort (Analysis &amp; Negotiation)</div>
-            <i class="fa-solid fa-arrow-right text-slate-400"></i>
-            <div class="px-3 py-1.5 bg-white rounded-lg shadow-sm border border-slate-300 text-sky-800">Write (Specification)</div>
-            <i class="fa-solid fa-arrow-right text-slate-400"></i>
-            <div class="px-3 py-1.5 bg-white rounded-lg shadow-sm border border-slate-300 text-sky-800">Confirm (Validation)</div>
-            <i class="fa-solid fa-arrow-right text-slate-400"></i>
-            <div class="px-3 py-1.5 bg-sky-600 text-white rounded-lg shadow-sm">Track (Management)</div>
+          <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 p-3 sm:p-4 bg-slate-100 rounded-xl mb-6 text-xs sm:text-sm font-bold text-slate-700">
+            <div class="px-2.5 sm:px-3 py-1 bg-white rounded-lg shadow-sm border border-slate-300 text-sky-800">Ask (Elicitation)</div>
+            <i class="fa-solid fa-arrow-right text-slate-400 text-xs"></i>
+            <div class="px-2.5 sm:px-3 py-1 bg-white rounded-lg shadow-sm border border-slate-300 text-sky-800">Sort (Analysis &amp; Negotiation)</div>
+            <i class="fa-solid fa-arrow-right text-slate-400 text-xs"></i>
+            <div class="px-2.5 sm:px-3 py-1 bg-white rounded-lg shadow-sm border border-slate-300 text-sky-800">Write (Specification)</div>
+            <i class="fa-solid fa-arrow-right text-slate-400 text-xs"></i>
+            <div class="px-2.5 sm:px-3 py-1 bg-white rounded-lg shadow-sm border border-slate-300 text-sky-800">Confirm (Validation)</div>
+            <i class="fa-solid fa-arrow-right text-slate-400 text-xs"></i>
+            <div class="px-2.5 sm:px-3 py-1 bg-sky-600 text-white rounded-lg shadow-sm">Track (Management)</div>
           </div>
 
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-sm">
-              <thead>
-                <tr class="bg-slate-100 text-slate-700 uppercase text-xs tracking-wider border-b border-slate-200">
-                  <th class="py-3 px-4 font-semibold">Activity</th>
-                  <th class="py-3 px-4 font-semibold">What Happens</th>
-                  <th class="py-3 px-4 font-semibold">Example (Enrollment Process)</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-slate-200">
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Elicitation</td>
-                  <td class="py-3 px-4 text-slate-600">Gather needs from users and stakeholders.</td>
-                  <td class="py-3 px-4 text-slate-600">Interview students and staff about problems with the current enrollment process.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Analysis &amp; Negotiation</td>
-                  <td class="py-3 px-4 text-slate-600">Clarify, compare, prioritize, and resolve conflicting needs.</td>
-                  <td class="py-3 px-4 text-slate-600">Students want many optional fields, but staff need a short form; the team agrees which fields are essential.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Specification</td>
-                  <td class="py-3 px-4 text-slate-600">Write the agreed requirements clearly so they can be understood and checked.</td>
-                  <td class="py-3 px-4 text-slate-600">Document the fields, permissions, and expected behavior of the enrollment form.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Validation</td>
-                  <td class="py-3 px-4 text-slate-600">Confirm that documented requirements reflect real needs and are feasible and testable.</td>
-                  <td class="py-3 px-4 text-slate-600">Show the written requirements to staff and ask them to confirm that no important enrollment rule is missing.</td>
-                </tr>
-                <tr class="hover:bg-slate-50">
-                  <td class="py-3 px-4 font-bold text-sky-900">Requirements Management</td>
-                  <td class="py-3 px-4 text-slate-600">Track changes to requirements and their impact over time.</td>
-                  <td class="py-3 px-4 text-slate-600">When the university changes an enrollment rule, the team records the change and identifies affected features and tests.</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="overflow-x-auto -mx-4 sm:mx-0">
+            <div class="inline-block min-w-full align-middle px-4 sm:px-0">
+              <table class="min-w-[580px] w-full text-left border-collapse text-xs sm:text-sm">
+                <thead>
+                  <tr class="bg-slate-100 text-slate-700 uppercase text-[11px] tracking-wider border-b border-slate-200">
+                    <th class="py-2.5 px-3 sm:px-4 font-semibold w-1/4">Activity</th>
+                    <th class="py-2.5 px-3 sm:px-4 font-semibold w-1/3">What Happens</th>
+                    <th class="py-2.5 px-3 sm:px-4 font-semibold">Example (Enrollment Process)</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200">
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Elicitation</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Gather needs from users and stakeholders.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Interview students and staff about problems with the current enrollment process.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Analysis &amp; Negotiation</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Clarify, compare, prioritize, and resolve conflicting needs.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Students want many optional fields, but staff need a short form; the team agrees which fields are essential.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-3 sm:px-4 font-bold text-sky-900">Specification</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Write the agreed requirements clearly so they can be understood and checked.</td>
+                    <td class="py-3 px-3 sm:px-4 text-slate-600">Document the fields, permissions, and expected behavior of the enrollment form.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-4 font-bold text-sky-900">Validation</td>
+                    <td class="py-3 px-4 text-slate-600">Confirm that documented requirements reflect real needs and are feasible and testable.</td>
+                    <td class="py-3 px-4 text-slate-600">Show the written requirements to staff and ask them to confirm that no important enrollment rule is missing.</td>
+                  </tr>
+                  <tr class="hover:bg-slate-50">
+                    <td class="py-3 px-4 font-bold text-sky-900">Requirements Management</td>
+                    <td class="py-3 px-4 text-slate-600">Track changes to requirements and their impact over time.</td>
+                    <td class="py-3 px-4 text-slate-600">When the university changes an enrollment rule, the team records the change and identifies affected features and tests.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- Section: Use Case Diagrams -->
       <section class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
-        <div class="bg-slate-800 text-white px-6 py-4 flex items-center justify-between">
-          <div class="flex items-center space-x-3">
-            <i class="fa-solid fa-project-diagram text-sky-400 text-lg"></i>
-            <h3 class="font-bold text-base">Use Case Diagrams</h3>
+        <div class="bg-slate-800 text-white px-4 sm:px-6 py-3.5 flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <i class="fa-solid fa-project-diagram text-sky-400"></i>
+            <h3 class="font-bold text-sm sm:text-base">Use Case Diagrams</h3>
           </div>
-          <span class="text-xs bg-slate-700 text-slate-300 px-2 py-1 rounded">High-Level Behavioral View</span>
+          <span class="text-[11px] bg-slate-700 text-slate-300 px-2 py-0.5 rounded">Behavioral View</span>
         </div>
-        <div class="p-6">
-          <p class="text-sm text-slate-600 mb-4">
+        <div class="p-4 sm:p-6">
+          <p class="text-xs sm:text-sm text-slate-600 mb-4 leading-relaxed">
             A use case diagram gives a high-level picture of who interacts with a system and what goals they can achieve. It shows system behavior from the <strong>user's point of view</strong>, not the internal code or step-by-step screen layout.
           </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
-            <div class="p-4 rounded-lg border border-slate-200 bg-slate-50">
-              <span class="font-bold text-sky-900 block text-sm">Actor</span>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 mb-6">
+            <div class="p-3.5 sm:p-4 rounded-lg border border-slate-200 bg-slate-50">
+              <span class="font-bold text-sky-900 block text-xs sm:text-sm">Actor</span>
               <p class="text-xs text-slate-600 mt-1">A person or external system that interacts with the system.</p>
               <span class="text-xs font-mono text-slate-500 mt-2 block">Ex: Student, Librarian, Payment Service</span>
             </div>
             <div class="p-4 rounded-lg border border-slate-200 bg-slate-50">
-              <span class="font-bold text-sky-900 block text-sm">Use Case</span>
+              <span class="font-bold text-sky-900 block text-xs sm:text-sm">Use Case</span>
               <p class="text-xs text-slate-600 mt-1">A goal or service the system provides; drawn as an oval.</p>
               <span class="text-xs font-mono text-slate-500 mt-2 block">Ex: Borrow a book, Pay a fee, View schedule</span>
             </div>
             <div class="p-4 rounded-lg border border-slate-200 bg-slate-50">
-              <span class="font-bold text-sky-900 block text-sm">System Boundary</span>
+              <span class="font-bold text-sky-900 block text-xs sm:text-sm">System Boundary</span>
               <p class="text-xs text-slate-600 mt-1">A box that defines what belongs to the system being modeled.</p>
               <span class="text-xs font-mono text-slate-500 mt-2 block">Ex: Box labeled "Campus Library System"</span>
             </div>
             <div class="p-4 rounded-lg border border-slate-200 bg-slate-50">
-              <span class="font-bold text-sky-900 block text-sm">Association</span>
+              <span class="font-bold text-sky-900 block text-xs sm:text-sm">Association</span>
               <p class="text-xs text-slate-600 mt-1">A line showing that an actor participates in a use case.</p>
               <span class="text-xs font-mono text-slate-500 mt-2 block">Ex: Student line to "Search Catalog"</span>
             </div>
             <div class="p-4 rounded-lg border-2 border-indigo-200 bg-indigo-50/50">
-              <span class="font-bold text-indigo-900 block text-sm">&laquo;include&raquo;</span>
+              <span class="font-bold text-indigo-900 block text-xs sm:text-sm">&laquo;include&raquo;</span>
               <p class="text-xs text-slate-600 mt-1">Shows <strong>required</strong> behavior reused by another use case.</p>
               <span class="text-xs font-mono text-slate-500 mt-2 block">Ex: "Borrow Book" includes "Check Borrowing Eligibility"</span>
             </div>
             <div class="p-4 rounded-lg border-2 border-amber-200 bg-amber-50/50">
-              <span class="font-bold text-amber-900 block text-sm">&laquo;extend&raquo;</span>
+              <span class="font-bold text-amber-900 block text-xs sm:text-sm">&laquo;extend&raquo;</span>
               <p class="text-xs text-slate-600 mt-1">Shows <strong>optional or conditional</strong> behavior added to a base use case.</p>
               <span class="text-xs font-mono text-slate-500 mt-2 block">Ex: "Apply Discount" extends "Checkout" when qualifying</span>
             </div>
           </div>
 
           <!-- 7 Steps to Turn a Paragraph into a Diagram -->
-          <div class="p-4 bg-slate-100 rounded-xl">
+          <div class="p-3.5 sm:p-4 bg-slate-100 rounded-xl">
             <h4 class="text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">How to turn a paragraph into a use case diagram (7 Steps):</h4>
-            <ol class="list-decimal list-inside text-xs text-slate-600 space-y-1">
+            <ol class="list-decimal list-inside text-xs text-slate-600 space-y-1 leading-relaxed">
               <li>Identify the system being described and draw a labeled boundary box.</li>
               <li>Underline the people or external systems that interact with it; these are possible actors.</li>
               <li>Look for goal-oriented verbs such as search, register, update, pay, cancel, or view.</li>
@@ -484,60 +506,60 @@
     <!-- ==========================================
          TAB 2: PROBLEM & SCRIPT DRILLS
          ========================================== -->
-    <div id="tab-drills" class="hidden space-y-8">
+    <div id="tab-drills" class="hidden space-y-6 sm:space-y-8">
       
-      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
         <div class="flex items-center space-x-3 mb-2">
-          <i class="fa-solid fa-brain text-sky-600 text-xl"></i>
-          <h2 class="text-lg font-bold text-slate-800">Verbatim Recall Drills</h2>
+          <i class="fa-solid fa-brain text-sky-600 text-lg sm:text-xl"></i>
+          <h2 class="text-base sm:text-lg font-bold text-slate-800">Verbatim Recall Drills</h2>
         </div>
-        <p class="text-sm text-slate-600">
-          Type your recalled term into the input box and click <strong>Check</strong>. If you are stuck, click the <strong><i class="fa-solid fa-eye text-slate-500"></i> eye icon</strong> to reveal the answer directly underneath without overwriting your input box.
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+          Type your recalled term into the input box and click <strong>Check</strong>. If you are stuck, click the <strong><i class="fa-solid fa-eye text-slate-500"></i> eye icon</strong> to toggle the answer hint directly underneath without overwriting your input box.
         </p>
       </div>
 
       <!-- Drill Group 1: SDLC Identification -->
-      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-5">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 space-y-4 sm:space-y-5">
         <div class="border-b border-slate-200 pb-3">
           <span class="text-xs font-bold text-sky-600 uppercase tracking-wide">Drill Set 1</span>
-          <h3 class="text-base font-bold text-slate-800">SDLC Phase Identification</h3>
+          <h3 class="text-sm sm:text-base font-bold text-slate-800">SDLC Phase Identification</h3>
           <p class="text-xs text-slate-500">Match the action to the exact SDLC phase (Requirements, Design, Implementation, Integration & Troubleshooting, Testing).</p>
         </div>
 
         <!-- Drill Item 1 -->
-        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2" id="drill-sdlc-1">
-          <p class="text-sm text-slate-700 font-medium">1. "The queue form submits a number, but the dashboard does not show it; the team checks the connection."</p>
+        <div class="p-3.5 sm:p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2.5" id="drill-sdlc-1">
+          <p class="text-xs sm:text-sm text-slate-700 font-medium">1. "The queue form submits a number, but the dashboard does not show it; the team checks the connection."</p>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <input type="text" placeholder="Type SDLC Phase..." class="drill-input flex-grow px-3 py-2 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
-            <div class="flex items-center space-x-2">
-              <button onclick="checkDrillItem('drill-sdlc-1', ['integration & troubleshooting', 'integration and troubleshooting', 'integration'])" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
-              <button onclick="revealDrillItem('drill-sdlc-1', 'Integration & troubleshooting')" title="Reveal Answer" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
+            <input type="text" placeholder="Type SDLC Phase..." class="drill-input flex-grow px-3 py-2 text-xs sm:text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
+            <div class="flex items-center space-x-2 flex-shrink-0">
+              <button onclick="checkDrillItem('drill-sdlc-1', ['integration & troubleshooting', 'integration and troubleshooting', 'integration'])" class="flex-1 sm:flex-initial px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
+              <button onclick="revealDrillItem('drill-sdlc-1', 'Integration & troubleshooting')" title="Toggle Hint" class="px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
           <div class="drill-feedback text-xs hidden pt-1"></div>
         </div>
 
         <!-- Drill Item 2 -->
-        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2" id="drill-sdlc-2">
-          <p class="text-sm text-slate-700 font-medium">2. "The team sketches the queue screen and plans how student records will be stored."</p>
+        <div class="p-3.5 sm:p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2.5" id="drill-sdlc-2">
+          <p class="text-xs sm:text-sm text-slate-700 font-medium">2. "The team sketches the queue screen and plans how student records will be stored."</p>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <input type="text" placeholder="Type SDLC Phase..." class="drill-input flex-grow px-3 py-2 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
-            <div class="flex items-center space-x-2">
-              <button onclick="checkDrillItem('drill-sdlc-2', ['design'])" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
-              <button onclick="revealDrillItem('drill-sdlc-2', 'Design')" title="Reveal Answer" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
+            <input type="text" placeholder="Type SDLC Phase..." class="drill-input flex-grow px-3 py-2 text-xs sm:text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
+            <div class="flex items-center space-x-2 flex-shrink-0">
+              <button onclick="checkDrillItem('drill-sdlc-2', ['design'])" class="flex-1 sm:flex-initial px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
+              <button onclick="revealDrillItem('drill-sdlc-2', 'Design')" title="Toggle Hint" class="px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
           <div class="drill-feedback text-xs hidden pt-1"></div>
         </div>
 
         <!-- Drill Item 3 -->
-        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2" id="drill-sdlc-3">
-          <p class="text-sm text-slate-700 font-medium">3. "Students try to get queue numbers, and testers check invalid inputs and duplicate requests."</p>
+        <div class="p-3.5 sm:p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2.5" id="drill-sdlc-3">
+          <p class="text-xs sm:text-sm text-slate-700 font-medium">3. "Students try to get queue numbers, and testers check invalid inputs and duplicate requests."</p>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <input type="text" placeholder="Type SDLC Phase..." class="drill-input flex-grow px-3 py-2 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
-            <div class="flex items-center space-x-2">
-              <button onclick="checkDrillItem('drill-sdlc-3', ['testing'])" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
-              <button onclick="revealDrillItem('drill-sdlc-3', 'Testing')" title="Reveal Answer" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
+            <input type="text" placeholder="Type SDLC Phase..." class="drill-input flex-grow px-3 py-2 text-xs sm:text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
+            <div class="flex items-center space-x-2 flex-shrink-0">
+              <button onclick="checkDrillItem('drill-sdlc-3', ['testing'])" class="flex-1 sm:flex-initial px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
+              <button onclick="revealDrillItem('drill-sdlc-3', 'Testing')" title="Toggle Hint" class="px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
           <div class="drill-feedback text-xs hidden pt-1"></div>
@@ -545,60 +567,60 @@
       </div>
 
       <!-- Drill Group 2: Technical Reviews and Audits -->
-      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-5">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 space-y-4 sm:space-y-5">
         <div class="border-b border-slate-200 pb-3">
           <span class="text-xs font-bold text-sky-600 uppercase tracking-wide">Drill Set 2</span>
-          <h3 class="text-base font-bold text-slate-800">Reviews &amp; Audits Clue Matching</h3>
+          <h3 class="text-sm sm:text-base font-bold text-slate-800">Reviews &amp; Audits Clue Matching</h3>
           <p class="text-xs text-slate-500">Provide the exact formal review/audit name (Requirements Review, Peer/Incremental, CDR, TRR, FAI, FCA, PCA).</p>
         </div>
 
         <!-- Drill Item 4 -->
-        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2" id="drill-rev-1">
-          <p class="text-sm text-slate-700 font-medium">1. "Checks whether the system, test cases, tools, environment, and people are ready for formal testing."</p>
+        <div class="p-3.5 sm:p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2.5" id="drill-rev-1">
+          <p class="text-xs sm:text-sm text-slate-700 font-medium">1. "Checks whether the system, test cases, tools, environment, and people are ready for formal testing."</p>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <input type="text" placeholder="Review or Audit name..." class="drill-input flex-grow px-3 py-2 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
-            <div class="flex items-center space-x-2">
-              <button onclick="checkDrillItem('drill-rev-1', ['test readiness review', 'trr'])" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
-              <button onclick="revealDrillItem('drill-rev-1', 'Test Readiness Review (TRR)')" title="Reveal Answer" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
+            <input type="text" placeholder="Review or Audit name..." class="drill-input flex-grow px-3 py-2 text-xs sm:text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
+            <div class="flex items-center space-x-2 flex-shrink-0">
+              <button onclick="checkDrillItem('drill-rev-1', ['test readiness review', 'trr'])" class="flex-1 sm:flex-initial px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
+              <button onclick="revealDrillItem('drill-rev-1', 'Test Readiness Review (TRR)')" title="Toggle Hint" class="px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
           <div class="drill-feedback text-xs hidden pt-1"></div>
         </div>
 
         <!-- Drill Item 5 -->
-        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2" id="drill-rev-2">
-          <p class="text-sm text-slate-700 font-medium">2. "The team compares the release version, installed components, and accompanying documents against the approved configuration list."</p>
+        <div class="p-3.5 sm:p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2.5" id="drill-rev-2">
+          <p class="text-xs sm:text-sm text-slate-700 font-medium">2. "The team compares the release version, installed components, and accompanying documents against the approved configuration list."</p>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <input type="text" placeholder="Review or Audit name..." class="drill-input flex-grow px-3 py-2 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
-            <div class="flex items-center space-x-2">
-              <button onclick="checkDrillItem('drill-rev-2', ['physical configuration audit', 'pca'])" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
-              <button onclick="revealDrillItem('drill-rev-2', 'Physical Configuration Audit (PCA)')" title="Reveal Answer" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
+            <input type="text" placeholder="Review or Audit name..." class="drill-input flex-grow px-3 py-2 text-xs sm:text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
+            <div class="flex items-center space-x-2 flex-shrink-0">
+              <button onclick="checkDrillItem('drill-rev-2', ['physical configuration audit', 'pca'])" class="flex-1 sm:flex-initial px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
+              <button onclick="revealDrillItem('drill-rev-2', 'Physical Configuration Audit (PCA)')" title="Toggle Hint" class="px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
           <div class="drill-feedback text-xs hidden pt-1"></div>
         </div>
 
         <!-- Drill Item 6 -->
-        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2" id="drill-rev-3">
-          <p class="text-sm text-slate-700 font-medium">3. "Auditors run defined scenarios to confirm that a booking system performs the actions promised in its requirements."</p>
+        <div class="p-3.5 sm:p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2.5" id="drill-rev-3">
+          <p class="text-xs sm:text-sm text-slate-700 font-medium">3. "Auditors run defined scenarios to confirm that a booking system performs the actions promised in its requirements."</p>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <input type="text" placeholder="Review or Audit name..." class="drill-input flex-grow px-3 py-2 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
-            <div class="flex items-center space-x-2">
-              <button onclick="checkDrillItem('drill-rev-3', ['functional configuration audit', 'fca'])" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
-              <button onclick="revealDrillItem('drill-rev-3', 'Functional Configuration Audit (FCA)')" title="Reveal Answer" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
+            <input type="text" placeholder="Review or Audit name..." class="drill-input flex-grow px-3 py-2 text-xs sm:text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
+            <div class="flex items-center space-x-2 flex-shrink-0">
+              <button onclick="checkDrillItem('drill-rev-3', ['functional configuration audit', 'fca'])" class="flex-1 sm:flex-initial px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
+              <button onclick="revealDrillItem('drill-rev-3', 'Functional Configuration Audit (FCA)')" title="Toggle Hint" class="px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
           <div class="drill-feedback text-xs hidden pt-1"></div>
         </div>
 
         <!-- Drill Item 7 -->
-        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2" id="drill-rev-4">
-          <p class="text-sm text-slate-700 font-medium">4. "A developer asks a teammate to inspect a newly added password-reset feature before merging it."</p>
+        <div class="p-3.5 sm:p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2.5" id="drill-rev-4">
+          <p class="text-xs sm:text-sm text-slate-700 font-medium">4. "A developer asks a teammate to inspect a newly added password-reset feature before merging it."</p>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <input type="text" placeholder="Review or Audit name..." class="drill-input flex-grow px-3 py-2 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
-            <div class="flex items-center space-x-2">
-              <button onclick="checkDrillItem('drill-rev-4', ['peer review', 'incremental review', 'peer/incremental review', 'peer'])" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
-              <button onclick="revealDrillItem('drill-rev-4', 'Peer/Incremental Review')" title="Reveal Answer" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
+            <input type="text" placeholder="Review or Audit name..." class="drill-input flex-grow px-3 py-2 text-xs sm:text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
+            <div class="flex items-center space-x-2 flex-shrink-0">
+              <button onclick="checkDrillItem('drill-rev-4', ['peer review', 'incremental review', 'peer/incremental review', 'peer'])" class="flex-1 sm:flex-initial px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
+              <button onclick="revealDrillItem('drill-rev-4', 'Peer/Incremental Review')" title="Toggle Hint" class="px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
           <div class="drill-feedback text-xs hidden pt-1"></div>
@@ -606,47 +628,47 @@
       </div>
 
       <!-- Drill Group 3: Requirements Development & Use Cases -->
-      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-5">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 space-y-4 sm:space-y-5">
         <div class="border-b border-slate-200 pb-3">
           <span class="text-xs font-bold text-sky-600 uppercase tracking-wide">Drill Set 3</span>
-          <h3 class="text-base font-bold text-slate-800">Requirements &amp; Use Case Modeling Recall</h3>
+          <h3 class="text-sm sm:text-base font-bold text-slate-800">Requirements &amp; Use Case Modeling Recall</h3>
           <p class="text-xs text-slate-500">Classify activities, relationships, and model components.</p>
         </div>
 
         <!-- Drill Item 8 -->
-        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2" id="drill-mod-1">
-          <p class="text-sm text-slate-700 font-medium">1. "A student may enroll only in subjects for which prerequisites are completed." (What requirement type is this?)</p>
+        <div class="p-3.5 sm:p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2.5" id="drill-mod-1">
+          <p class="text-xs sm:text-sm text-slate-700 font-medium">1. "A student may enroll only in subjects for which prerequisites are completed." (What requirement type is this?)</p>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <input type="text" placeholder="Requirement type..." class="drill-input flex-grow px-3 py-2 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
-            <div class="flex items-center space-x-2">
-              <button onclick="checkDrillItem('drill-mod-1', ['domain requirement', 'domain'])" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
-              <button onclick="revealDrillItem('drill-mod-1', 'Domain requirement (institutional academic rule)')" title="Reveal Answer" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
+            <input type="text" placeholder="Requirement type..." class="drill-input flex-grow px-3 py-2 text-xs sm:text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
+            <div class="flex items-center space-x-2 flex-shrink-0">
+              <button onclick="checkDrillItem('drill-mod-1', ['domain requirement', 'domain'])" class="flex-1 sm:flex-initial px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
+              <button onclick="revealDrillItem('drill-mod-1', 'Domain requirement (institutional academic rule)')" title="Toggle Hint" class="px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
           <div class="drill-feedback text-xs hidden pt-1"></div>
         </div>
 
         <!-- Drill Item 9 -->
-        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2" id="drill-mod-2">
-          <p class="text-sm text-slate-700 font-medium">2. What relationship shows required behavior reused by another use case?</p>
+        <div class="p-3.5 sm:p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2.5" id="drill-mod-2">
+          <p class="text-xs sm:text-sm text-slate-700 font-medium">2. What relationship shows required behavior reused by another use case?</p>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <input type="text" placeholder="Type relationship..." class="drill-input flex-grow px-3 py-2 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
-            <div class="flex items-center space-x-2">
-              <button onclick="checkDrillItem('drill-mod-2', ['include', '<<include>>', 'includes'])" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
-              <button onclick="revealDrillItem('drill-mod-2', '«include»')" title="Reveal Answer" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
+            <input type="text" placeholder="Type relationship..." class="drill-input flex-grow px-3 py-2 text-xs sm:text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
+            <div class="flex items-center space-x-2 flex-shrink-0">
+              <button onclick="checkDrillItem('drill-mod-2', ['include', '<<include>>', 'includes', '«include»'])" class="flex-1 sm:flex-initial px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
+              <button onclick="revealDrillItem('drill-mod-2', '«include»')" title="Toggle Hint" class="px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
           <div class="drill-feedback text-xs hidden pt-1"></div>
         </div>
 
         <!-- Drill Item 10 -->
-        <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2" id="drill-mod-3">
-          <p class="text-sm text-slate-700 font-medium">3. Students want many optional fields, but staff need a short form; the team clarifies and resolves this. What activity is this?</p>
+        <div class="p-3.5 sm:p-4 bg-slate-50 rounded-lg border border-slate-200 space-y-2.5" id="drill-mod-3">
+          <p class="text-xs sm:text-sm text-slate-700 font-medium">3. Students want many optional fields, but staff need a short form; the team clarifies and resolves this. What activity is this?</p>
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-            <input type="text" placeholder="Activity name..." class="drill-input flex-grow px-3 py-2 text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
-            <div class="flex items-center space-x-2">
-              <button onclick="checkDrillItem('drill-mod-3', ['analysis and negotiation', 'analysis & negotiation', 'analysis', 'negotiation'])" class="px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
-              <button onclick="revealDrillItem('drill-mod-3', 'Analysis and negotiation')" title="Reveal Answer" class="px-3 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
+            <input type="text" placeholder="Activity name..." class="drill-input flex-grow px-3 py-2 text-xs sm:text-sm border border-slate-300 rounded focus:ring-2 focus:ring-sky-500 focus:outline-none">
+            <div class="flex items-center space-x-2 flex-shrink-0">
+              <button onclick="checkDrillItem('drill-mod-3', ['analysis and negotiation', 'analysis & negotiation', 'analysis', 'negotiation'])" class="flex-1 sm:flex-initial px-4 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs font-semibold rounded shadow-sm transition">Check</button>
+              <button onclick="revealDrillItem('drill-mod-3', 'Analysis and negotiation')" title="Toggle Hint" class="px-3.5 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs rounded transition"><i class="fa-solid fa-eye"></i></button>
             </div>
           </div>
           <div class="drill-feedback text-xs hidden pt-1"></div>
@@ -658,39 +680,39 @@
     <!-- ==========================================
          TAB 4: CONCEPTUAL & ESSAY RECALL WORKBENCH
          ========================================== -->
-    <div id="tab-essay" class="hidden space-y-8">
+    <div id="tab-essay" class="hidden space-y-6 sm:space-y-8">
       
-      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
         <div class="flex items-center space-x-3 mb-2">
-          <i class="fa-solid fa-feather-pointed text-sky-600 text-xl"></i>
-          <h2 class="text-lg font-bold text-slate-800">Conceptual &amp; Essay Recall Workbench</h2>
+          <i class="fa-solid fa-feather-pointed text-sky-600 text-lg sm:text-xl"></i>
+          <h2 class="text-base sm:text-lg font-bold text-slate-800">Conceptual &amp; Essay Recall Workbench</h2>
         </div>
-        <p class="text-sm text-slate-600">
+        <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
           True mastery requires active retrieval without looking at prompts. Type your conceptual answer in your own words, then click <strong>Check My Response &amp; Reveal Rubric</strong> to evaluate yourself. Click it again to hide the rubric and refine your answer.
         </p>
       </div>
 
       <!-- Essay Prompt 1: Reviews and Audits Distinction -->
-      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-4">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 space-y-4">
         <div>
           <span class="text-xs font-bold text-sky-700 uppercase tracking-wide">Essay Challenge 1 &bull; Technical Audits</span>
-          <h3 class="text-base font-bold text-slate-800 mt-1">Distinguishing FCA vs. PCA in Architecture Deliverables</h3>
-          <p class="text-sm text-slate-600 mt-1">
+          <h3 class="text-sm sm:text-base font-bold text-slate-800 mt-1">Distinguishing FCA vs. PCA in Architecture Deliverables</h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
             Explain the core difference between a Functional Configuration Audit (FCA) and a Physical Configuration Audit (PCA). Provide a realistic software system integration scenario illustrating when each audit is triggered.
           </p>
         </div>
 
-        <textarea id="essay-input-1" rows="5" placeholder="Type your explanation from memory here..." class="w-full p-3 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+        <textarea id="essay-input-1" rows="5" placeholder="Type your explanation from memory here..." class="w-full p-3 text-xs sm:text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
 
-        <button onclick="toggleRubric('rubric-card-1', this)" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center space-x-2">
+        <button onclick="toggleRubric('rubric-card-1', this)" class="w-full sm:w-auto px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center justify-center space-x-2">
           <i class="fa-solid fa-check-double"></i>
           <span>Check My Response &amp; Reveal Rubric</span>
         </button>
 
         <!-- Hidden Evaluation Card 1 -->
         <div id="rubric-card-1" class="hidden border-t border-slate-200 pt-5 mt-4 space-y-4">
-          <div class="p-4 bg-sky-50 border border-sky-100 rounded-lg">
-            <h4 class="text-xs font-bold uppercase text-sky-900 mb-1 flex items-center space-x-1">
+          <div class="p-3.5 sm:p-4 bg-sky-50 border border-sky-100 rounded-lg">
+            <h4 class="text-xs font-bold uppercase text-sky-900 mb-1 flex items-center space-x-1.5">
               <i class="fa-solid fa-book-open"></i>
               <span>1. Standard Model Answer (Textbook Explanation)</span>
             </h4>
@@ -700,20 +722,20 @@
             </p>
           </div>
 
-          <div class="p-4 bg-amber-50 border border-amber-100 rounded-lg">
-            <h4 class="text-xs font-bold uppercase text-amber-900 mb-2 flex items-center space-x-1">
+          <div class="p-3.5 sm:p-4 bg-amber-50 border border-amber-100 rounded-lg">
+            <h4 class="text-xs font-bold uppercase text-amber-900 mb-2 flex items-center space-x-1.5">
               <i class="fa-solid fa-list-check"></i>
               <span>2. Key Points Rubric (Did your answer include these?)</span>
             </h4>
-            <ul class="text-xs text-slate-700 space-y-1 list-disc list-inside">
+            <ul class="text-xs text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
               <li>Stated that FCA focuses on <strong>functional performance and scenario execution</strong> against specs.</li>
               <li>Stated that PCA focuses on <strong>version numbers, physical binaries, libraries, and matching documentation</strong>.</li>
               <li>Recognized that FCA asks: <em>"Does it do what was promised?"</em> while PCA asks: <em>"Does what is packaged match the approved inventory records?"</em></li>
             </ul>
           </div>
 
-          <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
-            <h4 class="text-xs font-bold uppercase text-slate-800 mb-1 flex items-center space-x-1">
+          <div class="p-3.5 sm:p-4 bg-slate-50 border border-slate-200 rounded-lg">
+            <h4 class="text-xs font-bold uppercase text-slate-800 mb-1 flex items-center space-x-1.5">
               <i class="fa-solid fa-briefcase"></i>
               <span>3. Practical Business &amp; Architecture Implication</span>
             </h4>
@@ -725,26 +747,26 @@
       </div>
 
       <!-- Essay Prompt 2: SDLC Integration Phase -->
-      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-4">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 space-y-4">
         <div>
           <span class="text-xs font-bold text-sky-700 uppercase tracking-wide">Essay Challenge 2 &bull; SDLC</span>
-          <h3 class="text-base font-bold text-slate-800 mt-1">The Critical Role of Integration &amp; Troubleshooting</h3>
-          <p class="text-sm text-slate-600 mt-1">
+          <h3 class="text-sm sm:text-base font-bold text-slate-800 mt-1">The Critical Role of Integration &amp; Troubleshooting</h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
             Why is "Integration &amp; Troubleshooting" distinct from "Implementation" and "Testing"? Explain what happens during this phase and what clue distinguishes it in an exam scenario.
           </p>
         </div>
 
-        <textarea id="essay-input-2" rows="5" placeholder="Type your explanation from memory here..." class="w-full p-3 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+        <textarea id="essay-input-2" rows="5" placeholder="Type your explanation from memory here..." class="w-full p-3 text-xs sm:text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
 
-        <button onclick="toggleRubric('rubric-card-2', this)" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center space-x-2">
+        <button onclick="toggleRubric('rubric-card-2', this)" class="w-full sm:w-auto px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center justify-center space-x-2">
           <i class="fa-solid fa-check-double"></i>
           <span>Check My Response &amp; Reveal Rubric</span>
         </button>
 
         <!-- Hidden Evaluation Card 2 -->
         <div id="rubric-card-2" class="hidden border-t border-slate-200 pt-5 mt-4 space-y-4">
-          <div class="p-4 bg-sky-50 border border-sky-100 rounded-lg">
-            <h4 class="text-xs font-bold uppercase text-sky-900 mb-1 flex items-center space-x-1">
+          <div class="p-3.5 sm:p-4 bg-sky-50 border border-sky-100 rounded-lg">
+            <h4 class="text-xs font-bold uppercase text-sky-900 mb-1 flex items-center space-x-1.5">
               <i class="fa-solid fa-book-open"></i>
               <span>1. Standard Model Answer (Textbook Explanation)</span>
             </h4>
@@ -753,20 +775,20 @@
             </p>
           </div>
 
-          <div class="p-4 bg-amber-50 border border-amber-100 rounded-lg">
-            <h4 class="text-xs font-bold uppercase text-amber-900 mb-2 flex items-center space-x-1">
+          <div class="p-3.5 sm:p-4 bg-amber-50 border border-amber-100 rounded-lg">
+            <h4 class="text-xs font-bold uppercase text-amber-900 mb-2 flex items-center space-x-1.5">
               <i class="fa-solid fa-list-check"></i>
               <span>2. Key Points Rubric (Did your answer include these?)</span>
             </h4>
-            <ul class="text-xs text-slate-700 space-y-1 list-disc list-inside">
+            <ul class="text-xs text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
               <li>Distinguished building individual features (Implementation) from connecting them (Integration).</li>
               <li>Identified communication/middleware breakdown between components as the core trigger.</li>
               <li>Used the PDF's distinction clue: <em>Connecting modules or fixing communication between them? Integration and troubleshooting.</em></li>
             </ul>
           </div>
 
-          <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
-            <h4 class="text-xs font-bold uppercase text-slate-800 mb-1 flex items-center space-x-1">
+          <div class="p-3.5 sm:p-4 bg-slate-50 border border-slate-200 rounded-lg">
+            <h4 class="text-xs font-bold uppercase text-slate-800 mb-1 flex items-center space-x-1.5">
               <i class="fa-solid fa-briefcase"></i>
               <span>3. Practical Business &amp; Architecture Implication</span>
             </h4>
@@ -778,26 +800,26 @@
       </div>
 
       <!-- Essay Prompt 3: Requirements Engineering & Conflict Resolution -->
-      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-4">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 space-y-4">
         <div>
           <span class="text-xs font-bold text-sky-700 uppercase tracking-wide">Essay Challenge 3 &bull; Requirements Engineering</span>
-          <h3 class="text-base font-bold text-slate-800 mt-1">Elicitation vs. Analysis &amp; Negotiation</h3>
-          <p class="text-sm text-slate-600 mt-1">
+          <h3 class="text-sm sm:text-base font-bold text-slate-800 mt-1">Elicitation vs. Analysis &amp; Negotiation</h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
             Suppose two department heads disagree about who can approve student loan exemptions in an ERP system. Which requirements activity addresses this, what must happen before writing formal specifications, and why is this not merely "Elicitation"?
           </p>
         </div>
 
-        <textarea id="essay-input-3" rows="5" placeholder="Type your explanation from memory here..." class="w-full p-3 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+        <textarea id="essay-input-3" rows="5" placeholder="Type your explanation from memory here..." class="w-full p-3 text-xs sm:text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
 
-        <button onclick="toggleRubric('rubric-card-3', this)" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center space-x-2">
+        <button onclick="toggleRubric('rubric-card-3', this)" class="w-full sm:w-auto px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center justify-center space-x-2">
           <i class="fa-solid fa-check-double"></i>
           <span>Check My Response &amp; Reveal Rubric</span>
         </button>
 
         <!-- Hidden Evaluation Card 3 -->
         <div id="rubric-card-3" class="hidden border-t border-slate-200 pt-5 mt-4 space-y-4">
-          <div class="p-4 bg-sky-50 border border-sky-100 rounded-lg">
-            <h4 class="text-xs font-bold uppercase text-sky-900 mb-1 flex items-center space-x-1">
+          <div class="p-3.5 sm:p-4 bg-sky-50 border border-sky-100 rounded-lg">
+            <h4 class="text-xs font-bold uppercase text-sky-900 mb-1 flex items-center space-x-1.5">
               <i class="fa-solid fa-book-open"></i>
               <span>1. Standard Model Answer (Textbook Explanation)</span>
             </h4>
@@ -806,20 +828,20 @@
             </p>
           </div>
 
-          <div class="p-4 bg-amber-50 border border-amber-100 rounded-lg">
-            <h4 class="text-xs font-bold uppercase text-amber-900 mb-2 flex items-center space-x-1">
+          <div class="p-3.5 sm:p-4 bg-amber-50 border border-amber-100 rounded-lg">
+            <h4 class="text-xs font-bold uppercase text-amber-900 mb-2 flex items-center space-x-1.5">
               <i class="fa-solid fa-list-check"></i>
               <span>2. Key Points Rubric (Did your answer include these?)</span>
             </h4>
-            <ul class="text-xs text-slate-700 space-y-1 list-disc list-inside">
+            <ul class="text-xs text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
               <li>Correctly named <strong>Analysis and Negotiation</strong>.</li>
               <li>Explicitly stated that Elicitation is only gathering/discovering information, not resolving disagreements.</li>
               <li>Mentioned the sequence: Ask (Elicit) &rarr; Sort/Negotiate &rarr; Write (Specify) &rarr; Confirm (Validate) &rarr; Track.</li>
             </ul>
           </div>
 
-          <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
-            <h4 class="text-xs font-bold uppercase text-slate-800 mb-1 flex items-center space-x-1">
+          <div class="p-3.5 sm:p-4 bg-slate-50 border border-slate-200 rounded-lg">
+            <h4 class="text-xs font-bold uppercase text-slate-800 mb-1 flex items-center space-x-1.5">
               <i class="fa-solid fa-briefcase"></i>
               <span>3. Practical Business &amp; Architecture Implication</span>
             </h4>
@@ -831,26 +853,26 @@
       </div>
 
       <!-- Essay Prompt 4: Use Case Modeling Rules -->
-      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 space-y-4">
+      <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 space-y-4">
         <div>
           <span class="text-xs font-bold text-sky-700 uppercase tracking-wide">Essay Challenge 4 &bull; UML &amp; Use Case Modeling</span>
-          <h3 class="text-base font-bold text-slate-800 mt-1">Comparing &laquo;include&raquo; vs. &laquo;extend&raquo; Relationships</h3>
-          <p class="text-sm text-slate-600 mt-1">
+          <h3 class="text-sm sm:text-base font-bold text-slate-800 mt-1">Comparing &laquo;include&raquo; vs. &laquo;extend&raquo; Relationships</h3>
+          <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
             Clearly explain how to differentiate an &laquo;include&raquo; relationship from an &laquo;extend&raquo; relationship in a Use Case Diagram. Provide a distinct real-world software example for each.
           </p>
         </div>
 
-        <textarea id="essay-input-4" rows="5" placeholder="Type your explanation from memory here..." class="w-full p-3 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
+        <textarea id="essay-input-4" rows="5" placeholder="Type your explanation from memory here..." class="w-full p-3 text-xs sm:text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-sky-500 focus:outline-none"></textarea>
 
-        <button onclick="toggleRubric('rubric-card-4', this)" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center space-x-2">
+        <button onclick="toggleRubric('rubric-card-4', this)" class="w-full sm:w-auto px-4 py-2.5 bg-slate-800 hover:bg-slate-900 text-white text-xs font-bold rounded-lg shadow-sm transition flex items-center justify-center space-x-2">
           <i class="fa-solid fa-check-double"></i>
           <span>Check My Response &amp; Reveal Rubric</span>
         </button>
 
         <!-- Hidden Evaluation Card 4 -->
         <div id="rubric-card-4" class="hidden border-t border-slate-200 pt-5 mt-4 space-y-4">
-          <div class="p-4 bg-sky-50 border border-sky-100 rounded-lg">
-            <h4 class="text-xs font-bold uppercase text-sky-900 mb-1 flex items-center space-x-1">
+          <div class="p-3.5 sm:p-4 bg-sky-50 border border-sky-100 rounded-lg">
+            <h4 class="text-xs font-bold uppercase text-sky-900 mb-1 flex items-center space-x-1.5">
               <i class="fa-solid fa-book-open"></i>
               <span>1. Standard Model Answer (Textbook Explanation)</span>
             </h4>
@@ -860,12 +882,12 @@
             </p>
           </div>
 
-          <div class="p-4 bg-amber-50 border border-amber-100 rounded-lg">
-            <h4 class="text-xs font-bold uppercase text-amber-900 mb-2 flex items-center space-x-1">
+          <div class="p-3.5 sm:p-4 bg-amber-50 border border-amber-100 rounded-lg">
+            <h4 class="text-xs font-bold uppercase text-amber-900 mb-2 flex items-center space-x-1.5">
               <i class="fa-solid fa-list-check"></i>
               <span>2. Key Points Rubric (Did your answer include these?)</span>
             </h4>
-            <ul class="text-xs text-slate-700 space-y-1 list-disc list-inside">
+            <ul class="text-xs text-slate-700 space-y-1 list-disc list-inside leading-relaxed">
               <li>Stated that &laquo;include&raquo; is <strong>mandatory / always required</strong>.</li>
               <li>Stated that &laquo;extend&raquo; is <strong>conditional / optional</strong>.</li>
               <li>Gave concrete, valid examples for both.</li>
@@ -873,8 +895,8 @@
             </ul>
           </div>
 
-          <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg">
-            <h4 class="text-xs font-bold uppercase text-slate-800 mb-1 flex items-center space-x-1">
+          <div class="p-3.5 sm:p-4 bg-slate-50 border border-slate-200 rounded-lg">
+            <h4 class="text-xs font-bold uppercase text-slate-800 mb-1 flex items-center space-x-1.5">
               <i class="fa-solid fa-briefcase"></i>
               <span>3. Practical Business &amp; Architecture Implication</span>
             </h4>
@@ -936,9 +958,9 @@
       if (badge) {
         badge.textContent = `${checkedCount} / ${checkboxes.length} Mastered`;
         if (checkedCount === checkboxes.length) {
-          badge.className = "text-xs font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full border border-emerald-300";
+          badge.className = "self-start sm:self-auto text-xs font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full border border-emerald-300";
         } else {
-          badge.className = "text-xs font-semibold px-2.5 py-1 bg-sky-50 text-sky-700 rounded-full border border-sky-200";
+          badge.className = "self-start sm:self-auto text-xs font-semibold px-2.5 py-1 bg-sky-50 text-sky-700 rounded-full border border-sky-200";
         }
       }
       
@@ -961,7 +983,7 @@
       }
     }
 
- // --- 3. Drill Checking & Revealing Logic (Clean Feedback, No Input Overwrite) ---
+    // --- 3. Drill Checking & Revealing Logic (Clean Feedback, No Input Overwrite) ---
     function normalizeStr(str) {
       return (str || '')
         .toLowerCase()
@@ -1023,31 +1045,6 @@
         feedback.setAttribute('data-showing', 'hint');
       }
     }
-
-function revealDrillItem(containerId, standardAnswer) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  const feedback = container.querySelector('.drill-feedback');
-  if (!feedback) return;
-
-  // Check if the suggested answer hint is already currently displayed
-  const isCurrentlyShowingHint = !feedback.classList.contains('hidden') && feedback.getAttribute('data-showing') === 'hint';
-
-  if (isCurrentlyShowingHint) {
-    // Hide the hint on the second click
-    feedback.innerHTML = '';
-    feedback.classList.add('hidden');
-    feedback.removeAttribute('data-showing');
-  } else {
-    // Show the hint without modifying the input box
-    feedback.innerHTML = `<div class="p-2.5 bg-sky-50 border border-sky-200 rounded text-slate-800 mt-1">
-      <span class="font-bold text-sky-900 block mb-0.5"><i class="fa-regular fa-eye mr-1"></i>Suggested Answer:</span>
-      <span class="font-medium text-slate-700">${standardAnswer}</span>
-    </div>`;
-    feedback.classList.remove('hidden');
-    feedback.setAttribute('data-showing', 'hint');
-  }
-}
 
     // --- 4. Essay Recall Rubric Toggle (Show / Hide Toggleable) ---
     function toggleRubric(cardId, btn) {
